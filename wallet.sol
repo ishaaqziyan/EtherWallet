@@ -1,6 +1,8 @@
 pragma solidity 0.8.17;
 pragma abicoder v2;
 
+// Only to be run on Remix//
+
 contract Wallet {
         address[] public owners;
         unit limit;
@@ -57,10 +59,26 @@ contract Wallet {
      //An owner cannot do the same transfer twice.
      
      function approve(uint _id) public OnlyOwners{
-     require(approvals[msg.sender][_id]== false;
-     require(transferRequests[_id]
-     function(approvals[msg.sender] [_id]= true;
-     transferRequests[_id].aprovals++;
+         require(approvals[msg.sender][_id]== false;
+         require(transferRequests[_id].hasBeeSent == false);
+         
+         approvals[msg.sender][_id]=true;
+         transferRequests[_id].aprovals++;
+         emit ApprovalReceived (_id, transferrequests[_id].approvals, msg.sender);
+         
+         if (transferRequests [_id].approvals>=limit)
+         {
+           transferRequests{_id}hasBeensent=true;
+           transferRequests[_id].receiver,transfer(transferRequests{_id}.amount);
+           emit TransferApproved(_id);
+         }
+       }
+       
+       //must return all transfer requests
+       function getTransferRequets() public view returns (Transfer[] memory){
+       return transferRequests;
+          
+         
      
      
              
